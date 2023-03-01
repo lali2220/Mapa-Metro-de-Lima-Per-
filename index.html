@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <title>Mapa | Metro de Lima</title>
+    <link rel="icon" type="image/png" href="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Lima_Metro_logo_2_%28full%29.svg/1200px-Lima_Metro_logo_2_%28full%29.svg.png">
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.5.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.5.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+      body { margin: 0; padding: 0; }
+      #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+      .marker1 {
+        background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Lima_Metro_Linea_1.svg/1061px-Lima_Metro_Linea_1.svg.png');
+        background-size: cover;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+      .marker2 {
+        background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Lima_Metro_Linea_2_logo.svg/2048px-Lima_Metro_Linea_2_logo.svg.png');
+        background-size: cover;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+      .talleres {
+        background-image: url('https://img.freepik.com/iconos-gratis/tranvia_318-869112.jpg');
+        background-size: cover;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+      .mapboxgl-popup {
+        max-width: 200px;
+      }
+      .mapboxgl-popup-content {
+        text-align: center;
+        font-family: 'Open Sans', sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <div id='map'></div>
+    <script>
+      mapboxgl.accessToken = 'pk.eyJ1IjoianVsaW9jZXNhcnluZ2FmbG9yZXMyMDA0IiwiYSI6ImNsNGl4NjAxYzAxd2QzY3AwNHJ4MW4xcHQifQ.zcpzcLDTFjFk1FihS2k3yQ'; // ingresa aquí tu token de acceso de Mapbox
+      
+      // crea el mapa centrado en Perú
+      var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/satellite-streets-v11',
+        center: [-77.0427709205107, -12.046366293018197],
+        zoom: 10
+      });
+      
+      // agrega los marcadores
+      var markers1 = [
+      	{
+          coordinates: [-76.9332605912645, -12.207443983918589],
+          content: '<h3>Estación Villa El Salvador</h3><p>Obras civiles culminadas</p>'
+        },
+      	{
+          coordinates: [-76.93998176995058, -12.196208631332492],
+          content: '<h3>Estación Parque Industrial</h3><p>Obras civiles culminadas</p>'
+        },
+      	{
+          coordinates: [-76.9470016616563, -12.181673645100258],
+          content: '<h3>Estación Pumacahua</h3><p>Obras civiles culminadas</p>'
+        },
+      	{
+          coordinates: [-76.9503069448361, -12.169319647128244],
+          content: '<h3>Estación Villa Maria</h3><p>Obras civiles culminadas</p>'
+        },
+      	{
+          coordinates: [-76.95615673995309, -12.16129562775128],
+          content: '<h3>Estación Maria Auxiliadora</h3><p>Obras civiles culminadas</p>'
+        },
+      	{
+          coordinates: [-76.96584614483119, -12.15646039473913],
+          content: '<h3>Estación San Juan</h3><p>Obras civiles culminadas</p>'
+        },
+      	{
+          coordinates: [-76.97955013169972, -12.150863867156081],
+          content: '<h3>Estación Atocongo</h3><p>Obras civiles culminadas</p>'
+        },
+      	{
+          coordinates: [-76.99108631601253, -12.142591673749783],
+          content: '<h3>Estación Jorge Chavez</h3><p>Obras civiles culminadas</p>'
+        },
+      	{
+          coordinates: [-76.99701663811105, -12.134802729959196],
+          content: '<h3>Estación Ayacucho</h3><p>Obras civiles culminadas</p>'
+        },
+      	{
+          coordinates: [-77.00050964207806, -12.12729277268017],
+          content: '<h3>Estación Cabitos</h3><p>Obras civiles culminadas</p>'
+        },
+      	{
+          coordinates: [-77.00034555106211, -12.110370103925977],
+          content: '<h3>Estación Angamos</h3><p>Obras civiles culminadas</p>'
+        },
+      	{
+          coordinates: [-77.00175581597063, -12.10038506680699],
+          content: '<h3>Estación San Borja Sur</h3><p>Obras civiles culminadas</p>'
+        },
+      	{
+          coordinates: [-77.00373546328812, -12.08670198691551],
+          content: '<h3>Estación La Cultura</h3><p>Obras civiles culminadas</p>'
+        },
+      	{
+          coordinates: [-77.01111625874672, -12.074954723683744],
+          content: '<h3>Estación Arriola</h3><p>Obras civiles culminadas</p>'
+        },
+      	{
+          coordinates: [-77.01227313880193, -12.065673229944972],
+          content: '<h3>Estación Gamarra</h3><p>Obras civiles culminadas</p>'
+        },
+      	{
+          coordinates: [-77.01272844827297, -12.054281532700282],
+          content: '<h3>Estación Miguel Grau</h3><p>Obras civiles culminadas</p>'
+        },
+      	{
+          coordinates: [-77.00969645557328, -12.046141592303751],
+          content: '<h3>Estación El Angel</h3><p>Obras civiles culminadas</p>'
+        },
+      	{
+          coordinates: [-77.01160900602176, -12.041780421350031],
+          content: '<h3>Estación Presbítero Maestro</h3><p>Obras civiles culminadas</p>'
+        },
+      	{
+          coordinates: [-77.01113790555684, -12.02779493029296],
+          content: '<h3>Estación Caja de Agua</h3><p>Obras civiles culminadas</p>'
+        },
+      	{
+          coordinates: [-77.00267828325791, -12.01815411028009],
+          content: '<h3>Estación Pirámide del Sol</h3><p>Obras civiles culminadas</p>'
+        },
+      	{
+          coordinates: [-77.0052842504723, -12.007046208399462],
+          content: '<h3>Estación Los Jardines</h3><p>Obras civiles culminadas</p>'
+        },
+      	{
+          coordinates: [-77.00997494789956, -11.996100844821436],
+          content: '<h3>Estación Los Postes</h3><p>Obras civiles culminadas</p>'
+        },
+      	{
+          coordinates: [-77.00676791159847, -11.984929593902091],
+          content: '<h3>Estación San Carlos</h3><p>Obras civiles culminadas</p>'
+        },
+      	{
+          coordinates: [-77.00003622581053, -11.974667177448875],
+          content: '<h3>Estación San Martin</h3><p>Obras civiles culminadas</p>'
+        },
+      	{
+          coordinates: [-76.99348431753575, -11.967934962186968],
+          content: '<h3>Estación Santa Rosa</h3><p>Obras civiles culminadas</p>'
+        },
+      	{
+          coordinates: [-76.98762410521125, -11.95968735564714],
+          content: '<h3>Estación Bayovar</h3><p>Obras civiles culminadas</p>'
+        }
+      ]
+
+      var markers2 = [
+        {
+          coordinates: [-77.13749775766439, -12.053286523087456],
+          content: '<h3>Estación Puerto del Callao</h3><p>En construcción</p>'
+        },
+        {
+          coordinates: [-77.12140480035404, -12.058502406586898],
+          content: '<h3>Estación Buenos Aires</h3><p>En construcción</p>'
+        },
+        {
+          coordinates: [-77.11489268669244, -12.057003783177038],
+          content: '<h3>Estación Juan Pablo II</h3><p>En construcción</p>'
+        },
+        {
+          coordinates: [-77.10275142886768, -12.054506347969493],
+          content: '<h3>Estación Insurgentes</h3><p>En construcción</p>'
+        },
+        {
+          coordinates: [-77.09800000009155, -12.053598682924742],
+          content: '<h3>Estación Carmen de La Legua</h3><p>Pendiente</p>'
+        },
+        {
+          coordinates: [-77.08765174662047, -12.051611497468423],
+          content: '<h3>Estación Óscar R. Benavides</h3><p>En construcción</p>'
+        },
+        {
+          coordinates: [-77.07960866434601, -12.058055259578353],
+          content: '<h3>Estación San Marcos</h3><p>Pendiente</p>'
+        },
+        {
+          coordinates: [-77.07584384828344, -12.059505611795604],
+          content: '<h3>Estación Elio</h3><p>Pendiente</p>'
+        },
+        {
+          coordinates: [-77.06718945638619, -12.05760772868238],
+          content: '<h3>Estación La alborada</h3><p>Pendiente</p>'
+        },
+        {
+          coordinates: [-77.0577606904498, -12.055643078096905],
+          content: '<h3>Estación Tingo Maria</h3><p>En construcción</p>'
+        },
+        {
+          coordinates: [-77.05174941343769, -12.057239605257761],
+          content: '<h3>Estación Parque Murillo</h3><p>En construcción</p>'
+        },
+        {
+          coordinates: [-77.04271948684462, -12.05983181602178],
+          content: '<h3>Estación Plaza Bolognesi</h3><p>En construcción</p>'
+        },
+        {
+          coordinates: [-77.03787213136012, -12.05982132966644],
+          content: '<h3>Estación Estación Central</h3><p>En construcción</p>'
+        },
+        {
+          coordinates: [-77.03010397899978, -12.063270967576852],
+          content: '<h3>Estación Plaza Manco Cápac</h3><p>En construcción</p>'
+        },
+        {
+          coordinates: [-77.02126399469097, -12.06208879088409],
+          content: '<h3>Estación Cangallo</h3><p>En construcción</p>'
+        },
+        {
+          coordinates: [-77.01202170767625, -12.060956602576404],
+          content: '<h3>Estación 28 de Julio</h3><p>En construcción</p>'
+        },
+        {
+          coordinates: [-77.00569109786733, -12.061292014188936],
+          content: '<h3>Estación Nicolás Ayllón</h3><p>En construcción</p>'
+        },
+        {
+          coordinates: [-76.99830842527513, -12.063628100506909],
+          content: '<h3>Estación Circunvalación</h3><p>En construcción</p>'
+        },
+        {
+          coordinates: [-76.9905508113918, -12.064262520752514],
+          content: '<h3>Estación San Juan de Dios</h3><p>En construcción</p>'
+        },
+        {
+          coordinates: [-76.97382900104682, -12.058563232414103],
+          content: '<h3>Estación Evitamiento</h3><p>Obras civiles culminadas</p>'
+        },
+        {
+          coordinates: [-76.96365412703722, -12.05421688033414],
+          content: '<h3>Estación Óvalo Santa Anita</h3><p>Obras civiles culminadas</p>'
+        },
+        {
+          coordinates: [-76.95624575936368, -12.051097921099547],
+          content: '<h3>Estación Colectora Industrial</h3><p>Obras civiles culminadas</p>'
+        },
+        {
+          coordinates: [-76.94553849033683, -12.046834867727169],
+          content: '<h3>Estación Hermilio Valdizán</h3><p>Obras civiles culminadas</p>'
+        },
+        {
+          coordinates: [-76.93864112019106, -12.044099646537344],
+          content: '<h3>Estación Mercado Santa Anita</h3><p>Obras civiles culminadas</p>'
+        },
+        {
+          coordinates: [-76.93255631519678, -12.038949103192536],
+          content: '<h3>Estación Vista Alegre</h3><p>En construcción</p>'
+        },
+        {
+          coordinates: [-76.92616645310837, -12.031378409430506],
+          content: '<h3>Estación Prolongación Javier Prado</h3><p>En construcción</p>'
+        },
+        {
+          coordinates: [-76.91891276246163, -12.025563979151336],
+          content: '<h3>Estación Municipalidad de Ate</h3><p>Obras civiles culminadas</p>'
+        }
+      ];
+
+      var taller = [
+      	{
+          coordinates: [-76.94222397147898, -12.04368215828341],
+          content: '<h3>Patio taller Linea 2 (Ate)</h3><p>Patio taller de la linea 2</p>'
+        },
+        {
+          coordinates: [-76.93032775433043, -12.209276801357076],
+          content: '<h3>Patio taller Linea 1 (VES)</h3><p>Patio taller de la linea 1</p>'
+        },
+        {
+          coordinates: [-76.98808775074663, -11.95549130765297],
+          content: '<h3>Patio taller Linea 1 (SJL)</h3><p>Patio taller de la linea 1</p>'
+        }
+      ];
+      
+      
+      // agrega los marcadores al mapa
+      markers1.forEach(function(marker) {
+        // crea un elemento HTML para el marcador
+        var el = document.createElement('div');
+        el.className = 'marker1';
+
+        // crea un marcador en el mapa y lo asigna al elemento HTML creado
+        new mapboxgl.Marker(el)
+          .setLngLat(marker.coordinates)
+          .setPopup(new mapboxgl.Popup({ offset: 25 })
+            .setHTML(marker.content))
+          .addTo(map);
+      });
+
+      markers2.forEach(function(marker) {
+        // crea un elemento HTML para el marcador
+        var el = document.createElement('div');
+        el.className = 'marker2';
+
+        // crea un marcador en el mapa y lo asigna al elemento HTML creado
+        new mapboxgl.Marker(el)
+          .setLngLat(marker.coordinates)
+          .setPopup(new mapboxgl.Popup({ offset: 25 })
+            .setHTML(marker.content))
+          .addTo(map);
+      });
+
+       taller.forEach(function(marker) {
+        // crea un elemento HTML para el marcador
+        var el = document.createElement('div');
+        el.className = 'talleres';
+
+        // crea un marcador en el mapa y lo asigna al elemento HTML creado
+        new mapboxgl.Marker(el)
+          .setLngLat(marker.coordinates)
+          .setPopup(new mapboxgl.Popup({ offset: 25 })
+            .setHTML(marker.content))
+          .addTo(map);
+      });
+    </script>
+  </body>
+</html>
